@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rey das Muambas MT - Pedidos</title>
+    <style>
+        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f4f6f8; color: #333; padding: 15px; }
+        .container { max-width: 600px; margin: 0 auto; background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        h1 { font-size: 1.4rem; margin-bottom: 5px; text-align: center; }
+        .subtitle { font-size: 0.85rem; color: #666; text-align: center; margin-bottom: 15px; }
+        .section-title { font-size: 1rem; font-weight: 600; margin: 20px 0 10px 0; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+        .produto-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f0f0f0; gap: 10px; }
+        .produto-info { flex-grow: 1; }
+        .produto-nome { font-weight: 600; font-size: 0.9rem; }
+        .produto-detalhes-precos { font-size: 0.75rem; color: #555; margin-top: 3px; }
+        .qtd-controls { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+        .qtd-controls button { width: 30px; height: 30px; border: 1px solid #ccc; background: #fff; border-radius: 4px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
+        input[type="text"], select, textarea { width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.9rem; }
+        .total-box { display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; font-weight: bold; margin: 15px 0; padding: 10px; background: #f8f9fa; border-radius: 6px; }
+        .btn-whatsapp { display: block; width: 100%; background-color: #25d366; color: white; text-align: center; text-decoration: none; border: none; padding: 14px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>👑 Rey das Muambas MT</h1>
+    <div class="subtitle">Faça seu pedido diretamente pelo WhatsApp</div>
+
+    <div class="section-title">1. Escolha os Produtos</div>
+    
+    <div id="lista-produtos">
+        <!-- XIAOMI / REDMI -->
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi a7 pro 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.000,00 | 5x: R$ 1.300,00 | 10x: R$ 1.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(1, -1)">-</button><span id="qtd-1" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(1, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 15C 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.000,00 | 5x: R$ 1.300,00 | 10x: R$ 1.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(2, -1)">-</button><span id="qtd-2" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(2, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 15C 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.300,00 | 5x: R$ 1.600,00 | 10x: R$ 2.100,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(3, -1)">-</button><span id="qtd-3" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(3, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 15 128/6</div><div class="produto-detalhes-precos">À vista: R$ 1.300,00 | 5x: R$ 1.600,00 | 10x: R$ 2.100,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(4, -1)">-</button><span id="qtd-4" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(4, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 15 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.500,00 | 5x: R$ 1.800,00 | 10x: R$ 2.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(5, -1)">-</button><span id="qtd-5" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(5, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 17 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.300,00 | 5x: R$ 1.600,00 | 10x: R$ 2.100,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(6, -1)">-</button><span id="qtd-6" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(6, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 17 256/4</div><div class="produto-detalhes-precos">À vista: R$ 1.500,00 | 5x: R$ 1.800,00 | 10x: R$ 2.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(7, -1)">-</button><span id="qtd-7" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(7, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 17 256/6</div><div class="produto-detalhes-precos">À vista: R$ 1.700,00 | 5x: R$ 2.000,00 | 10x: R$ 2.500,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(8, -1)">-</button><span id="qtd-8" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(8, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Redmi 17 5g 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.500,00 | 5x: R$ 1.800,00 | 10x: R$ 2.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(9, -1)">-</button><span id="qtd-9" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(9, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 128/6</div><div class="produto-detalhes-precos">À vista: R$ 1.500,00 | 5x: R$ 1.800,00 | 10x: R$ 2.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(10, -1)">-</button><span id="qtd-10" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(10, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.800,00 | 5x: R$ 2.100,00 | 10x: R$ 2.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(11, -1)">-</button><span id="qtd-11" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(11, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 Pro 256/8 4g</div><div class="produto-detalhes-precos">À vista: R$ 2.000,00 | 5x: R$ 2.300,00 | 10x: R$ 2.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(12, -1)">-</button><span id="qtd-12" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(12, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 Pro 256/8 5g</div><div class="produto-detalhes-precos">À vista: R$ 2.200,00 | 5x: R$ 2.500,00 | 10x: R$ 3.000,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(13, -1)">-</button><span id="qtd-13" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(13, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 Pro 512/12 4g</div><div class="produto-detalhes-precos">À vista: R$ 2.400,00 | 5x: R$ 2.700,00 | 10x: R$ 3.200,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(14, -1)">-</button><span id="qtd-14" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(14, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 Pro 512/8 5g</div><div class="produto-detalhes-precos">À vista: R$ 2.600,00 | 5x: R$ 2.900,00 | 10x: R$ 3.400,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(15, -1)">-</button><span id="qtd-15" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(15, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.500,00 | 5x: R$ 1.800,00 | 10x: R$ 2.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(16, -1)">-</button><span id="qtd-16" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(16, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 128/6</div><div class="produto-detalhes-precos">À vista: R$ 1.500,00 | 5x: R$ 1.800,00 | 10x: R$ 2.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(17, -1)">-</button><span id="qtd-17" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(17, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 256/6</div><div class="produto-detalhes-precos">À vista: R$ 1.800,00 | 5x: R$ 2.100,00 | 10x: R$ 2.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(18, -1)">-</button><span id="qtd-18" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(18, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.800,00 | 5x: R$ 2.100,00 | 10x: R$ 2.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(19, -1)">-</button><span id="qtd-19" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(19, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 128/6 5G</div><div class="produto-detalhes-precos">À vista: R$ 1.800,00 | 5x: R$ 2.100,00 | 10x: R$ 2.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(20, -1)">-</button><span id="qtd-20" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(20, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 256/6 5G</div><div class="produto-detalhes-precos">À vista: R$ 2.000,00 | 5x: R$ 2.300,00 | 10x: R$ 2.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(21, -1)">-</button><span id="qtd-21" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(21, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 pro 5G 128/6</div><div class="produto-detalhes-precos">À vista: R$ 2.100,00 | 5x: R$ 2.400,00 | 10x: R$ 2.900,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(22, -1)">-</button><span id="qtd-22" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(22, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 pro 5G 512/8</div><div class="produto-detalhes-precos">À vista: R$ 2.700,00 | 5x: R$ 3.000,00 | 10x: R$ 3.500,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(23, -1)">-</button><span id="qtd-23" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(23, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 Pro Max 5G 256/8</div><div class="produto-detalhes-precos">À vista: R$ 2.800,00 | 5x: R$ 3.100,00 | 10x: R$ 3.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(24, -1)">-</button><span id="qtd-24" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(24, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 17 Pro Max 5G 512/8</div><div class="produto-detalhes-precos">À vista: R$ 3.100,00 | 5x: R$ 3.400,00 | 10x: R$ 3.900,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(25, -1)">-</button><span id="qtd-25" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(25, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 pro + 5G 256/8</div><div class="produto-detalhes-precos">À vista: R$ 2.500,00 | 5x: R$ 2.800,00 | 10x: R$ 3.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(26, -1)">-</button><span id="qtd-26" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(26, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Note 15 pro + 5G 512/12</div><div class="produto-detalhes-precos">À vista: R$ 2.700,00 | 5x: R$ 3.000,00 | 10x: R$ 3.500,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(27, -1)">-</button><span id="qtd-27" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(27, 1)">+</button></div></div>
+        
+        <!-- POCO -->
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco C71 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.000,00 | 5x: R$ 1.300,00 | 10x: R$ 1.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(28, -1)">-</button><span id="qtd-28" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(28, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco C81 Pro 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.000,00 | 5x: R$ 1.300,00 | 10x: R$ 1.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(29, -1)">-</button><span id="qtd-29" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(29, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco C81 Pro 256/4</div><div class="produto-detalhes-precos">À vista: R$ 1.300,00 | 5x: R$ 1.600,00 | 10x: R$ 2.100,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(30, -1)">-</button><span id="qtd-30" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(30, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco C85 128/6</div><div class="produto-detalhes-precos">À vista: R$ 1.100,00 | 5x: R$ 1.400,00 | 10x: R$ 1.900,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(31, -1)">-</button><span id="qtd-31" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(31, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco C85 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.300,00 | 5x: R$ 1.600,00 | 10x: R$ 2.100,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(32, -1)">-</button><span id="qtd-32" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(32, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco C95 Pro 128/6</div><div class="produto-detalhes-precos">À vista: R$ 1.400,00 | 5x: R$ 1.700,00 | 10x: R$ 2.200,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(33, -1)">-</button><span id="qtd-33" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(33, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco C95 Pro 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.700,00 | 5x: R$ 2.000,00 | 10x: R$ 2.500,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(34, -1)">-</button><span id="qtd-34" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(34, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco X8 256/8</div><div class="produto-detalhes-precos">À vista: R$ 2.200,00 | 5x: R$ 2.500,00 | 10x: R$ 3.000,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(35, -1)">-</button><span id="qtd-35" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(35, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco X8 256/12</div><div class="produto-detalhes-precos">À vista: R$ 2.400,00 | 5x: R$ 2.700,00 | 10x: R$ 3.200,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(36, -1)">-</button><span id="qtd-36" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(36, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco X8 Pro 256/8</div><div class="produto-detalhes-precos">À vista: R$ 2.700,00 | 5x: R$ 3.000,00 | 10x: R$ 3.500,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(37, -1)">-</button><span id="qtd-37" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(37, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco X8 Pro 512/8</div><div class="produto-detalhes-precos">À vista: R$ 2.800,00 | 5x: R$ 3.100,00 | 10x: R$ 3.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(38, -1)">-</button><span id="qtd-38" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(38, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco X8 Pro 512/12</div><div class="produto-detalhes-precos">À vista: R$ 3.000,00 | 5x: R$ 3.300,00 | 10x: R$ 3.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(39, -1)">-</button><span id="qtd-39" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(39, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco X8 Pro Max 256/12</div><div class="produto-detalhes-precos">À vista: R$ 3.200,00 | 5x: R$ 3.500,00 | 10x: R$ 4.000,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(40, -1)">-</button><span id="qtd-40" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(40, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco X8 Pro Max 512/12</div><div class="produto-detalhes-precos">À vista: R$ 3.500,00 | 5x: R$ 3.800,00 | 10x: R$ 4.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(41, -1)">-</button><span id="qtd-41" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(41, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Poco M8 Pro 256/8 5g</div><div class="produto-detalhes-precos">À vista: R$ 2.200,00 | 5x: R$ 2.500,00 | 10x: R$ 3.000,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(42, -1)">-</button><span id="qtd-42" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(42, 1)">+</button></div></div>
+        
+        <!-- REALME -->
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme Note 60x 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.000,00 | 5x: R$ 1.300,00 | 10x: R$ 1.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(43, -1)">-</button><span id="qtd-43" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(43, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme Note 70 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.100,00 | 5x: R$ 1.400,00 | 10x: R$ 1.900,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(44, -1)">-</button><span id="qtd-44" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(44, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme Note 70 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.300,00 | 5x: R$ 1.600,00 | 10x: R$ 2.100,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(45, -1)">-</button><span id="qtd-45" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(45, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme Note 80 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.100,00 | 5x: R$ 1.400,00 | 10x: R$ 1.900,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(46, -1)">-</button><span id="qtd-46" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(46, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme C71 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.100,00 | 5x: R$ 1.400,00 | 10x: R$ 1.900,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(47, -1)">-</button><span id="qtd-47" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(47, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme C71 128/6 5G</div><div class="produto-detalhes-precos">À vista: R$ 1.300,00 | 5x: R$ 1.600,00 | 10x: R$ 2.100,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(48, -1)">-</button><span id="qtd-48" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(48, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme C100i 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.200,00 | 5x: R$ 1.500,00 | 10x: R$ 2.000,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(49, -1)">-</button><span id="qtd-49" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(49, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme C85 128/6</div><div class="produto-detalhes-precos">À vista: R$ 1.500,00 | 5x: R$ 1.800,00 | 10x: R$ 2.300,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(50, -1)">-</button><span id="qtd-50" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(50, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme C85 256/8</div><div class="produto-detalhes-precos">À vista: R$ 1.800,00 | 5x: R$ 2.100,00 | 10x: R$ 2.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(51, -1)">-</button><span id="qtd-51" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(51, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Realme C85 256/8 5G</div><div class="produto-detalhes-precos">À vista: R$ 2.000,00 | 5x: R$ 2.300,00 | 10x: R$ 2.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(52, -1)">-</button><span id="qtd-52" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(52, 1)">+</button></div></div>
+        
+        <!-- SAMSUNG -->
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Samsung A07 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.200,00 | 5x: R$ 1.500,00 | 10x: R$ 2.000,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(53, -1)">-</button><span id="qtd-53" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(53, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Samsung A57 256/8 5g</div><div class="produto-detalhes-precos">À vista: R$ 2.800,00 | 5x: R$ 3.100,00 | 10x: R$ 3.600,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(54, -1)">-</button><span id="qtd-54" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(54, 1)">+</button></div></div>
+        
+        <!-- MOTOROLA -->
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Moto G06 128/4</div><div class="produto-detalhes-precos">À vista: R$ 1.000,00 | 5x: R$ 1.300,00 | 10x: R$ 1.800,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(55, -1)">-</button><span id="qtd-55" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(55, 1)">+</button></div></div>
+        <div class="produto-item"><div class="produto-info"><div class="produto-nome">Moto G06 256/4</div><div class="produto-detalhes-precos">À vista: R$ 1.100,00 | 5x: R$ 1.400,00 | 10x: R$ 1.900,00</div></div><div class="qtd-controls"><button type="button" onclick="alterarQtd(56, -1)">-</button><span id="qtd-56" style="font-weight: bold; min-width: 18px; text-align: center;">0</span><button type="button" onclick="alterarQtd(56, 1)">+</button></div></div>
+    </div>
+
+    <div class="section-title">2. Seus Dados & Pagamento</div>
+    
+    <div class="form-group">
+        <label for="nome">Seu Nome Completo *</label>
+        <input type="text" id="nome" placeholder="Digite seu nome">
+    </div>
+
+    <div class="form-group">
+        <label for="empresa">Onde você trabalha (Empresa/Local) *</label>
+        <input type="text" id="empresa" placeholder="Ex: Escritório Central / Autônomo">
+    </div>
+
+    <div class="form-group">
+        <label for="pagamento">Forma de Pagamento *</label>
+        <select id="pagamento" onchange="atualizarTotal()">
+            <option value="À Vista (Pix/Dinheiro)">À Vista (Pix / Dinheiro)</option>
+            <option value="Parcelado em 5x">Parcelado em 5x</option>
+            <option value="Parcelado em 10x">Parcelado em 10x</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="observacao">Observações (opcional)</label>
+        <textarea id="observacao" rows="2" placeholder="Ex: Cor preferida..."></textarea>
+    </div>
+
+    <div class="total-box">
+        <span>Total:</span>
+        <span id="valor-total">R$ 0,00</span>
+    </div>
+
+    <!-- Botão que envia automaticamente de forma 100% direta -->
+    <button type="button" class="btn-whatsapp" onclick="enviarPedidoAutomatico()">🚀 Enviar Pedido no WhatsApp</button>
+</div>
+
+<script>
+    const NUMERO_WHATSAPP = "5565992454495";
+    const URL_GOOGLE_SHEETS = "COLE_SUA_URL_DO_APPS_SCRIPT_AQUI";
+
+    const precosProdutos = {
+        1: { nome: "Redmi a7 pro 128/4", avista: 1000, p5x: 1300, p10x: 1800 },
+        2: { nome: "Redmi 15C 128/4", avista: 1000, p5x: 1300, p10x: 1800 },
+        3: { nome: "Redmi 15C 256/8", avista: 1300, p5x: 1600, p10x: 2100 },
+        4: { nome: "Redmi 15 128/6", avista: 1300, p5x: 1600, p10x: 2100 },
+        5: { nome: "Redmi 15 256/8", avista: 1500, p5x: 1800, p10x: 2300 },
+        6: { nome: "Redmi 17 128/4", avista: 1300, p5x: 1600, p10x: 2100 },
+        7: { nome: "Redmi 17 256/4", avista: 1500, p5x: 1800, p10x: 2300 },
+        8: { nome: "Redmi 17 256/6", avista: 1700, p5x: 2000, p10x: 2500 },
+        9: { nome: "Redmi 17 5g 128/4", avista: 1500, p5x: 1800, p10x: 2300 },
+        10: { nome: "Note 15 128/6", avista: 1500, p5x: 1800, p10x: 2300 },
+        11: { nome: "Note 15 256/8", avista: 1800, p5x: 2100, p10x: 2600 },
+        12: { nome: "Note 15 Pro 256/8 4g", avista: 2000, p5x: 2300, p10x: 2800 },
+        13: { nome: "Note 15 Pro 256/8 5g", avista: 2200, p5x: 2500, p10x: 3000 },
+        14: { nome: "Note 15 Pro 512/12 4g", avista: 2400, p5x: 2700, p10x: 3200 },
+        15: { nome: "Note 15 Pro 512/8 5g", avista: 2600, p5x: 2900, p10x: 3400 },
+        16: { nome: "Note 17 128/4", avista: 1500, p5x: 1800, p10x: 2300 },
+        17: { nome: "Note 17 128/6", avista: 1500, p5x: 1800, p10x: 2300 },
+        18: { nome: "Note 17 256/6", avista: 1800, p5x: 2100, p10x: 2600 },
+        19: { nome: "Note 17 256/8", avista: 1800, p5x: 2100, p10x: 2600 },
+        20: { nome: "Note 17 128/6 5G", avista: 1800, p5x: 2100, p10x: 2600 },
+        21: { nome: "Note 17 256/6 5G", avista: 2000, p5x: 2300, p10x: 2800 },
+        22: { nome: "Note 17 pro 5G 128/6", avista: 2100, p5x: 2400, p10x: 2900 },
+        23: { nome: "Note 17 pro 5G 512/8", avista: 2700, p5x: 3000, p10x: 3500 },
+        24: { nome: "Note 17 Pro Max 5G 256/8", avista: 2800, p5x: 3100, p10x: 3600 },
+        25: { nome: "Note 17 Pro Max 5G 512/8", avista: 3100, p5x: 3400, p10x: 3900 },
+        26: { nome: "Note 15 pro + 5G 256/8", avista: 2500, p5x: 2800, p10x: 3300 },
+        27: { nome: "Note 15 pro + 5G 512/12", avista: 2700, p5x: 3000, p10x: 3500 },
+        28: { nome: "Poco C71 128/4", avista: 1000, p5x: 1300, p10x: 1800 },
+        29: { nome: "Poco C81 Pro 128/4", avista: 1000, p5x: 1300, p10x: 1800 },
+        30: { nome: "Poco C81 Pro 256/4", avista: 1300, p5x: 1600, p10x: 2100 },
+        31: { nome: "Poco C85 128/6", avista: 1100, p5x: 1400, p10x: 1900 },
+        32: { nome: "Poco C85 256/8", avista: 1300, p5x: 1600, p10x: 2100 },
+        33: { nome: "Poco C95 Pro 128/6", avista: 1400, p5x: 1700, p10x: 2200 },
+        34: { nome: "Poco C95 Pro 256/8", avista: 1700, p5x: 2000, p10x: 2500 },
+        35: { nome: "Poco X8 256/8", avista: 2200, p5x: 2500, p10x: 3000 },
+        36: { nome: "Poco X8 256/12", avista: 2400, p5x: 2700, p10x: 3200 },
+        37: { nome: "Poco X8 Pro 256/8", avista: 2700, p5x: 3000, p10x: 3500 },
+        38: { nome: "Poco X8 Pro 512/8", avista: 2800, p5x: 3100, p10x: 3600 },
+        39: { nome: "Poco X8 Pro 512/12", avista: 3000, p5x: 3300, p10x: 3800 },
+        40: { nome: "Poco X8 Pro Max 256/12", avista: 3200, p5x: 3500, p10x: 4000 },
+        41: { nome: "Poco X8 Pro Max 512/12", avista: 3500, p5x: 3800, p10x: 4300 },
+        42: { nome: "Poco M8 Pro 256/8 5g", avista: 2200, p5x: 2500, p10x: 3000 },
+        43: { nome: "Realme Note 60x 128/4", avista: 1000, p5x: 1300, p10x: 1800 },
+        44: { nome: "Realme Note 70 128/4", avista: 1100, p5x: 1400, p10x: 1900 },
+        45: { nome: "Realme Note 70 256/8", avista: 1300, p5x: 1600, p10x: 2100 },
+        46: { nome: "Realme Note 80 128/4", avista: 1100, p5x: 1400, p10x: 1900 },
+        47: { nome: "Realme C71 128/4", avista: 1100, p5x: 1400, p10x: 1900 },
+        48: { nome: "Realme C71 128/6 5G", avista: 1300, p5x: 1600, p10x: 2100 },
+        49: { nome: "Realme C100i 128/4", avista: 1200, p5x: 1500, p10x: 2000 },
+        50: { nome: "Realme C85 128/6", avista: 1500, p5x: 1800, p10x: 2300 },
+        51: { nome: "Realme C85 256/8", avista: 1800, p5x: 2100, p10x: 2600 },
+        52: { nome: "Realme C85 256/8 5G", avista: 2000, p5x: 2300, p10x: 2800 },
+        53: { nome: "Samsung A07 128/4", avista: 1200, p5x: 1500, p10x: 2000 },
+        54: { nome: "Samsung A57 256/8 5g", avista: 2800, p5x: 3100, p10x: 3600 },
+        55: { nome: "Moto G06 128/4", avista: 1000, p5x: 1300, p10x: 1800 },
+        56: { nome: "Moto G06 256/4", avista: 1100, p5x: 1400, p10x: 1900 }
+    };
+
+    const carrinho = {};
+
+    function alterarQtd(id, delta) {
+        if (!carrinho[id]) carrinho[id] = 0;
+        if (carrinho[id] + delta >= 0) {
+            carrinho[id] += delta;
+            document.getElementById(`qtd-${id}`).innerText = carrinho[id];
+            atualizarTotal();
+        }
+    }
+
+    function atualizarTotal() {
+        const formaPagamento = document.getElementById("pagamento").value;
+        let total = 0;
+        for (let id in carrinho) {
+            const qtd = carrinho[id];
+            if (qtd > 0 && precosProdutos[id]) {
+                let precoUnitario = precosProdutos[id].avista;
+                if (formaPagamento === "Parcelado em 5x") precoUnitario = precosProdutos[id].p5x;
+                else if (formaPagamento === "Parcelado em 10x") precoUnitario = precosProdutos[id].p10x;
+                total += qtd * precoUnitario;
+            }
+        }
+        let textoTotal = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        if (formaPagamento === "Parcelado em 5x" && total > 0) textoTotal += " (Total em 5x)";
+        else if (formaPagamento === "Parcelado em 10x" && total > 0) textoTotal += " (Total em 10x)";
+        document.getElementById("valor-total").innerText = textoTotal;
+    }
+
+    function enviarPedidoAutomatico() {
+        const nome = document.getElementById("nome").value.trim();
+        const empresa = document.getElementById("empresa").value.trim();
+        const pagamento = document.getElementById("pagamento").value;
+        const observacao = document.getElementById("observacao").value.trim();
+
+        if (!nome || !empresa) {
+            alert("Por favor, preencha seu nome e o local onde trabalha.");
+            return;
+        }
+
+        let itensTexto = "";
+        let total = 0;
+
+        for (let id in carrinho) {
+            const qtd = carrinho[id];
+            if (qtd > 0 && precosProdutos[id]) {
+                const prod = precosProdutos[id];
+                let precoUnitario = prod.avista;
+                let descPreco = `R$ ${prod.avista.toFixed(2).replace('.', ',')} (À vista)`;
+                
+                if (pagamento === "Parcelado em 5x") {
+                    precoUnitario = prod.p5x;
+                    descPreco = `R$ ${prod.p5x.toFixed(2).replace('.', ',')} (5x)`;
+                } else if (pagamento === "Parcelado em 10x") {
+                    precoUnitario = prod.p10x;
+                    descPreco = `R$ ${prod.p10x.toFixed(2).replace('.', ',')} (10x)`;
+                }
+
+                total += qtd * precoUnitario;
+                itensTexto += `• ${qtd}x ${prod.nome} - ${descPreco}\n`;
+            }
+        }
+
+        if (total === 0) {
+            alert("Adicione pelo menos um produto ao carrinho antes de enviar!");
+            return;
+        }
+
+        let mensagem = `*👑 NOVO PEDIDO - REY DAS MUAMBAS MT* 🛍️\n\n`;
+        mensagem += `*Cliente:* ${nome}\n`;
+        mensagem += `*Trabalha em:* ${empresa}\n\n`;
+        mensagem += `*Itens do Pedido:*\n${itensTexto}\n`;
+        mensagem += `*Forma de Pagamento:* ${pagamento}\n`;
+        mensagem += `*Valor Total:* R$ ${total.toFixed(2).replace('.', ',')}\n`;
+
+        if (observacao) {
+            mensagem += `\n*Obs:* ${observacao}\n`;
+        }
+
+        // Salvar na Planilha em segundo plano (se configurado)
+        if (URL_GOOGLE_SHEETS && URL_GOOGLE_SHEETS !== "COLE_SUA_URL_DO_APPS_SCRIPT_AQUI") {
+            fetch(URL_GOOGLE_SHEETS, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nome: nome,
+                    empresa: empresa,
+                    produtos: itensTexto.trim(),
+                    pagamento: pagamento,
+                    total: "R$ " + total.toFixed(2).replace('.', ',')
+                })
+            }).catch(err => console.log("Erro ao salvar na planilha: ", err));
+        }
+
+        // Abre o WhatsApp instantaneamente de forma 100% automática
+        const urlWhatsApp = "https://wa.me/" + NUMERO_WHATSAPP + "?text=" + encodeURIComponent(mensagem);
+        window.location.href = urlWhatsApp;
+    }
+</script>
+
+</body>
+</html>
